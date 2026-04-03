@@ -1,7 +1,6 @@
 import os
 import sys
-import urllib.request  # <<< CORREZIONE QUI: Importiamo il modulo intero
-
+import urllib.request 
 
 def download_youtube_thumbnail(url: str):
     """
@@ -11,27 +10,27 @@ def download_youtube_thumbnail(url: str):
     print("----------------------------------------------")
     print("🛠️  Inizio download thumbnail (Metodo diretto)...")
 
-    # 1. Estrarre l'ID del video
+
     video_id = None
     if "v=" in url:
-        # Esempio: youtube.com/watch?v=ID&t=10s
+
         video_id = url.split("v=")[-1].split("&")[0]
     elif "embed/" in url:
-        # Esempio: youtube.com/embed/ID
+   
         video_id = url.split("embed/")[-1].split("?")[0]
     else:
         print("\n❌ ERRORE: URL non valido o non riconducibile a un ID video.")
         return
 
-    # 2. Costruire l'URL del thumbnail di massima qualità (maxresdefault)
+
     thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
 
-    # 3. Definire il percorso locale di salvataggio
+
     filename = f"{video_id}_thumbnail.jpg"
     output_path = os.path.join(os.getcwd(), filename)
 
     try:
-        # Scarica l'immagine usando il modulo urllib.request
+
         urllib.request.urlretrieve(thumbnail_url, output_path)
 
         print("\n✅ Download completato con successo!")
@@ -45,11 +44,11 @@ def download_youtube_thumbnail(url: str):
 
 
 if __name__ == "__main__":
-    # 1. Ricevi l'URL dal parametro della riga di comando
+
     if len(sys.argv) > 1:
         youtube_url = sys.argv[1]
     else:
-        # 2. Richiedi l'URL se non fornito
+
         youtube_url = input("Inserisci l'URL di YouTube: ").strip()
 
     if youtube_url:
